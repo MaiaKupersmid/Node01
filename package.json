@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "\"tp01 dai\"",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
-    "ej01":"node src/ej01.js", 
-    "ej02":"node src/ej02.js",
-    "ej03":"node src/ej03.js",
-    "ej04":"node src/ej04.js",
-    "ej05":"node src/ej05.js",
-    "ej06":"node src/ej06.js",
-    "ej07":"node src/ej07.js"
+    "ej01": "node src/ej01.js",
+    "ej02": "node src/ej02.js",
+    "ej03": "node src/ej03.js",
+    "ej04": "node src/ej04.js",
+    "ej05": "node src/ej05.js",
+    "ej06": "node src/ej06.js",
+    "ej07": "node src/ej07.js",
+    "ej08": "node src/ej08.js"
+
   },
   "repository": {
     "type": "git",
@@ -22,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/julietaIzbicki/TP-dai-Node-01/issues"
   },
-  "homepage": "https://github.com/julietaIzbicki/TP-dai-Node-01#readme"
+  "homepage": "https://github.com/julietaIzbicki/TP-dai-Node-01#readme",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "country-code-lookup": "^0.1.2",
+    "currency-map-country": "^1.0.12"
+  }
 }
