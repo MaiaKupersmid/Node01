@@ -13,11 +13,12 @@ const OMDBSearchByPage = async(searchText, page = 1) =>{
 
     try{        
         const responseData = await axios.get(requestString);
-        returnObject.respuesta = responseData.data.Response;
-        if(returnObject.respuesta == true){
+        //returnObject.respuesta = responseData.data.Response;
+        if(responseData.data.Response == "True"){
             //console.log('responseData', responseData.data);
             console.log("adentro")
-            returnObject.cantidadTotal = responseData.datos.totalResults;
+            returnObject.respuesta = true;
+            returnObject.cantidadTotal = responseData.data.totalResults;
             returnObject.datos = responseData.data.Search;
         }
         else if(returnObject.respuesta == false){
@@ -44,11 +45,14 @@ const OMDBSearchComplete = async (searchText) => {
     try{
         const responseData = await axios.get(requestString);
         returnObject.respuesta = responseData.data.Response;
-        if(returnObject.respuesta  == true){
-            console.log('responseData', responseData.data);
-            returnObject.datos = responseData.data.Search;
-            returnObject.cantidadTotal = responseData.datos.totalResults;
-            returnObject.respuesta = responseData.data.Response;
+        if(returnObject.respuesta  == "True"){
+            for(let i= 0; i= responseData.data.totalResults/10; i++)
+            {
+                console.log('responseData', responseData.data);
+                returnObject.datos = responseData.data.Search;
+                returnObject.cantidadTotal = responseData.data.totalResults;
+                returnObject.respuesta = responseData.data.Response;
+            }
         }
         else if(returnObject.respuesta == false){
             returnObject.datos = null;
@@ -65,30 +69,19 @@ const OMDBGetByImdbID = async(imdbID) => {
     let returnObject = { 
         respuesta : true, 
         cantidadTotal:0, 
-        datos :{} }; 
-        const requestString = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${imdbID}`;
-        console.log(requestString);
+        datos :{} 
+    }; 
+    const requestString = `http://www.omdbapi.com/?apikey=${APIKEY}&i=${imdbID}`;
+        //console.log(requestString);
 
     try{
         const responseData = await axios.get(requestString);
-        returnObject.respuesta = responseData.data.Response;
-        if(returnObject.respuesta == true){
-            returnObject.datos = responseData.data.Search;
-            returnObject.cantidadTotal = responseData.datos.totalResults;
-            returnObject.respuesta = responseData.data.Response;
-            console.log('responseData', responseData.data);
-            return returnObject;
-        }
-        else if(returnObject.respuesta == false){ 
-            returnObject.datos = null;
-            returnObject.cantidadTotal = null;
-            returnObject.respuesta = responseData.data.Response;
-            return returnObject;
-        }
+        return responseData.data;
     } catch (error) {
-        console.error("ERROR al hacer la request: ", error)
+        console.error("ERROR al la request: ", error)
+        return "null";
     }
         
-    }; 
+}; 
 
 export{OMDBSearchByPage, OMDBSearchComplete, OMDBGetByImdbID};
